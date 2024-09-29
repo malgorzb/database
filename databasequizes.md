@@ -95,12 +95,14 @@ select country.name from country, airport, goal, game, goal_reached where countr
  select country.name as "country name", airport.name as "airport name" from country
     -> inner join airport where airport.iso_country = country.iso_country
     -> and country.iso_country = "FI";
-    ![Screenshot 2024-09-29 213004](https://github.com/user-attachments/assets/c2d28f78-4c20-4f39-bd8c-c50e32621d70)
+![Screenshot 2024-09-29 213004](https://github.com/user-attachments/assets/c2d28f78-4c20-4f39-bd8c-c50e32621d70)
 
 # 2
 select game.screen_name, airport.name from game
 right join airport where airport.ident = game.location;
+
 //
+
 select screen_name, airport.name from game inner join airport on location = ident;
 ![Screenshot 2024-09-29 213447](https://github.com/user-attachments/assets/57868a07-2713-4a52-9b1c-53a709e09c2a)
 ![Screenshot 2024-09-29 213501](https://github.com/user-attachments/assets/f1ee3084-e685-484c-ad36-d09759ee302e)
@@ -115,7 +117,7 @@ select screen_name, airport.name from game inner join airport on location = iden
 select airport.name, game.screen_name from airport
     -> left join game on game.location = airport.ident
     -> where airport.name like "%Hels%";
-    ![Screenshot 2024-09-29 213549](https://github.com/user-attachments/assets/9c4e02fc-967c-4576-99d3-69ffc5b730e1)
+![Screenshot 2024-09-29 213549](https://github.com/user-attachments/assets/9c4e02fc-967c-4576-99d3-69ffc5b730e1)
 
 # 5 
  select goal.name, game.screen_name from goal
@@ -138,12 +140,12 @@ select name from country where iso_country in( select iso_country from airport w
 select screen_name from game
     -> where id in(select game_id from goal_reached where goal_id
     -> in(select goal.id from goal where goal.name = "clouds"));
-    ![Screenshot 2024-09-29 213939](https://github.com/user-attachments/assets/09b63385-03d3-4bd0-b8f4-67969e680423)
+![Screenshot 2024-09-29 213939](https://github.com/user-attachments/assets/09b63385-03d3-4bd0-b8f4-67969e680423)
 
 # 4
  select name from country where iso_country
     -> not in(select iso_country from airport);
-    ![Screenshot 2024-09-29 213955](https://github.com/user-attachments/assets/2067597a-4737-43cc-9d8f-f5a38b253948)
+![Screenshot 2024-09-29 213955](https://github.com/user-attachments/assets/2067597a-4737-43cc-9d8f-f5a38b253948)
 
 # 5
 select name from goal where id
@@ -165,19 +167,19 @@ select name from goal where id
 select continent, count(*)
     -> from country
     -> group by continent;
-    ![Screenshot 2024-09-29 214114](https://github.com/user-attachments/assets/80f6cdf5-95df-4dd1-9e7a-0a101e309e6a)
+![Screenshot 2024-09-29 214114](https://github.com/user-attachments/assets/80f6cdf5-95df-4dd1-9e7a-0a101e309e6a)
 
 # 3
 select screen_name, count(*)
     -> from game, goal_reached
     -> where id = game_id
     -> group by screen_name;
-    ![Screenshot 2024-09-29 214132](https://github.com/user-attachments/assets/8346bc3d-89e9-4dfd-878e-ab24f9096e23)
+![Screenshot 2024-09-29 214132](https://github.com/user-attachments/assets/8346bc3d-89e9-4dfd-878e-ab24f9096e23)
 
 # 4
 select screen_name from game
     -> where co2_consumed in(select min(co2_consumed) from game);
-    ![Screenshot 2024-09-29 214146](https://github.com/user-attachments/assets/0fa37af8-0658-4520-9470-7817e1893b9e)
+![Screenshot 2024-09-29 214146](https://github.com/user-attachments/assets/0fa37af8-0658-4520-9470-7817e1893b9e)
 
 # 5 
  select country.name, count(*) from airport, country
@@ -185,14 +187,14 @@ select screen_name from game
     -> group by country.iso_country
     -> order by count(*) desc
     -> limit 50;
-    ![Screenshot 2024-09-29 214203](https://github.com/user-attachments/assets/207a7ebb-a840-4ed3-a116-bbd9b4edaa12)
+![Screenshot 2024-09-29 214203](https://github.com/user-attachments/assets/207a7ebb-a840-4ed3-a116-bbd9b4edaa12)
 
 # 6
  select country.name from airport, country
     -> where airport.iso_country = country.iso_country
     -> group by country.iso_country
     -> having count(*) >= 1000;
-    ![Screenshot 2024-09-29 214222](https://github.com/user-attachments/assets/7e7186d2-d772-400f-8553-11f7e408925c)
+![Screenshot 2024-09-29 214222](https://github.com/user-attachments/assets/7e7186d2-d772-400f-8553-11f7e408925c)
 
 # 7
  select name from airport where elevation_ft in(select max(elevation_ft) from airport);
@@ -209,10 +211,10 @@ select screen_name from game
     -> where id in(select goal_id from goal_reached
     -> where game_id in(select game.id from game
     -> where screen_name = "Vesa"));
-    ![Screenshot 2024-09-29 214317](https://github.com/user-attachments/assets/47f25311-d5db-4a06-8ed1-a97a9cd60bdc)
+![Screenshot 2024-09-29 214317](https://github.com/user-attachments/assets/47f25311-d5db-4a06-8ed1-a97a9cd60bdc)
 
 # 10
  select name from airport
     -> where latitude_deg in(select min(latitude_deg) from airport);
-    ![Screenshot 2024-09-29 214342](https://github.com/user-attachments/assets/a296048d-b8d8-41f9-9403-a64143d134c1)
+![Screenshot 2024-09-29 214342](https://github.com/user-attachments/assets/a296048d-b8d8-41f9-9403-a64143d134c1)
 
